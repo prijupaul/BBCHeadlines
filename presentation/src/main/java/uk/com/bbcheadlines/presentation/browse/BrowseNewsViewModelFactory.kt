@@ -11,7 +11,7 @@ open class BrowseNewsViewModelFactory(
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(BrowseNewsViewModel::class.java)) {
-            return BrowseNewsViewModel(getNews,newsMapper) as T
+            return BrowseNewsViewModel(getNews, newsMapper) as T
         }
 
         throw IllegalArgumentException("Unknown viewmodel class")
