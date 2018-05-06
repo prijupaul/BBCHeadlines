@@ -1,0 +1,89 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+android {
+    def globalConfiguration = rootProject.extensions.getByName("ext")
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "uk.com.bbcheadlines.bbcheadlines"
+        minSdkVersion 21
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "uk.com.bbcheadlines.bbcheadlines.test.TestRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    packagingOptions {
+        exclude 'LICENSE.txt'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+    }
+    lintOptions {
+        quiet true
+        abortOnError false
+        ignoreWarnings true
+    }
+    buildToolsVersion '27.0.3'
+}
+
+dependencies {
+//    def mobileUiDependencies = rootProject.ext.mobileUiDependencies
+    def mobileUiTestDependencies = rootProject.ext.mobileUiTestDependencies
+
+
+    implementation project(':domain')
+
+
+    // Instrumentation test dependencies
+    androidTestImplementation mobileUiTestDependencies.junit
+    androidTestImplementation mobileUiTestDependencies.mockito
+    androidTestImplementation mobileUiTestDependencies.mockitoAndroid
+    androidTestImplementation (mobileUiTestDependencies.espressoCore) {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestImplementation (mobileUiTestDependencies.androidRunner) {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestImplementation (mobileUiTestDependencies.androidRules) {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestImplementation (mobileUiTestDependencies.espressoIntents) {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestImplementation(mobileUiTestDependencies.espressoContrib) {
+        exclude module: 'appcompat'
+        exclude module: 'appcompat-v7'
+        exclude module: 'support-v4'
+        exclude module: 'support-v13'
+        exclude module: 'support-annotations'
+        exclude module: 'recyclerview-v7'
+        exclude module: 'design'
+    }
+
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+
+    testImplementation mobileUiTestDependencies.junit
+    testImplementation mobileUiTestDependencies.mockito
+    testImplementation mobileUiTestDependencies.assertj
+    testImplementation mobileUiTestDependencies.robolectric
+
+}
