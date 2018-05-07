@@ -43,12 +43,41 @@ android {
 }
 
 dependencies {
-//    def mobileUiDependencies = rootProject.ext.mobileUiDependencies
+    def mobileUiDependencies = rootProject.ext.mobileUiDependencies
     def mobileUiTestDependencies = rootProject.ext.mobileUiTestDependencies
 
+    implementation project(':presentation')
+    implementation project(':data')
+    implementation project(':cache')
+    implementation project(':remote')
 
-    implementation project(':domain')
+    implementation mobileUiDependencies.javaxAnnotation
 
+    implementation mobileUiDependencies.kotlin
+    implementation mobileUiDependencies.javaxInject
+    implementation mobileUiDependencies.rxKotlin
+    implementation mobileUiDependencies.androidAnnotations
+    implementation mobileUiDependencies.androidSupportV4
+    implementation mobileUiDependencies.androidSupportV13
+    implementation mobileUiDependencies.appCompatV7
+    implementation mobileUiDependencies.supportRecyclerView
+    implementation mobileUiDependencies.supportDesign
+    implementation mobileUiDependencies.timber
+    implementation mobileUiDependencies.rxAndroid
+    implementation mobileUiDependencies.glide
+    implementation mobileUiDependencies.dagger
+    implementation mobileUiDependencies.daggerSupport
+
+    compile presentationDependencies.archRuntime
+    compile presentationDependencies.archExtensions
+    compile "android.arch.persistence.room:rxjava2:1.0.0-alpha9-1"
+    kapt presentationDependencies.archCompiler
+
+    testImplementation mobileUiTestDependencies.kotlinJUnit
+
+    kapt mobileUiDependencies.daggerCompiler
+    kapt mobileUiDependencies.daggerProcessor
+    compileOnly mobileUiDependencies.glassfishAnnotation
 
     // Instrumentation test dependencies
     androidTestImplementation mobileUiTestDependencies.junit
@@ -76,14 +105,6 @@ dependencies {
         exclude module: 'design'
     }
 
-
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
-
-    testImplementation mobileUiTestDependencies.junit
-    testImplementation mobileUiTestDependencies.mockito
-    testImplementation mobileUiTestDependencies.assertj
-    testImplementation mobileUiTestDependencies.robolectric
-
+    kaptTest mobileUiDependencies.daggerCompiler
+    kaptAndroidTest mobileUiDependencies.daggerCompiler
 }
