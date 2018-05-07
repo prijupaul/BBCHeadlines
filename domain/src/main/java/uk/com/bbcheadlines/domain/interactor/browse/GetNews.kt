@@ -10,9 +10,9 @@ import javax.inject.Inject
 open class GetNews @Inject constructor(val newsRepository: NewsRepository,
                                        threadExecutor: ThreadExecutor,
                                        postExecutionThread: PostExecutionThread):
-        FlowableUseCase<List<News>,Nothing>(threadExecutor,postExecutionThread) {
+        FlowableUseCase<List<News>,Void>(threadExecutor,postExecutionThread) {
 
-    public override fun constructUseCaseObservable(params: Nothing?): Flowable<List<News>> {
+    public override fun constructUseCaseObservable(params: Void?): Flowable<List<News>> {
         return newsRepository.getNews()
     }
 }

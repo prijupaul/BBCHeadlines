@@ -5,7 +5,7 @@ import android.arch.lifecycle.ViewModelProvider
 import uk.com.bbcheadlines.domain.executor.interactor.browse.GetNews
 import uk.com.bbcheadlines.presentation.mapper.NewsMapper
 
-open class BrowseNewsViewModelFactory(
+open class  BrowseNewsViewModelFactory(
         private val getNews: GetNews,
         private val newsMapper: NewsMapper) : ViewModelProvider.Factory {
 

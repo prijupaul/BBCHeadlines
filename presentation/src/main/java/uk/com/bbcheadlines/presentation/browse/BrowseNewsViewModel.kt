@@ -1,5 +1,6 @@
 package uk.com.bbcheadlines.presentation.browse
 
+import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import io.reactivex.subscribers.DisposableSubscriber
@@ -26,15 +27,17 @@ open class BrowseNewsViewModel @Inject internal constructor(
         super.onCleared()
     }
 
+    fun getNews() : LiveData<Resource<List<NewsView>>> {
+        return newsLiveData
+    }
+
     private fun fetchNews() {
         newsLiveData.postValue(Resource(ResourceState.LOADING, null, null))
         return getNews.execute(NewsSubscriber())
     }
 
     inner class NewsSubscriber : DisposableSubscriber<List<News>>() {
-        override fun onComplete() {
-
-        }
+        override fun onComplete() { }
 
         override fun onNext(t: List<News>?) {
             newsLiveData.postValue(Resource(ResourceState.SUCCESS,
