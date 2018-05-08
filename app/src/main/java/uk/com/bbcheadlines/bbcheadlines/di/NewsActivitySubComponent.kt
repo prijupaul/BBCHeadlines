@@ -2,7 +2,7 @@ package uk.com.bbcheadlines.bbcheadlines.di
 
 import dagger.Subcomponent
 import dagger.android.AndroidInjector
-import uk.com.bbcheadlines.bbcheadlines.MainActivity
+import uk.com.bbcheadlines.bbcheadlines.ui.MainActivity
 
 @Subcomponent
 interface MainActivitySubComponent : AndroidInjector<MainActivity> {

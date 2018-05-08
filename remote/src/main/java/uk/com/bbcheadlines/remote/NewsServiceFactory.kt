@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit
 
 object NewsServiceFactory {
 
-    fun makeBuffeoorService(isDebug: Boolean): NewsService {
+    fun makeNewsHttpService(isDebug: Boolean): NewsService {
         val okHttpClient = makeOkHttpClient(
                 makeLoggingInterceptor(isDebug))
         return makeNewsService(okHttpClient, makeGson())
@@ -23,7 +23,7 @@ object NewsServiceFactory {
                 .baseUrl("https://newsapi.org/v2/")
                 .client(okHttpClient)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addConverterFactory(GsonConverterFactory.create())
                 .build()
         return retrofit.create(NewsService::class.java)
     }

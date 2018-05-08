@@ -37,7 +37,7 @@ class NewsRemoteImplTest {
         val newsResponse = NewsFactory.makeNewsResponse()
         stubNewsServiceGetNews(Flowable.just(newsResponse))
         val newsEntities = mutableListOf<NewsEntity>()
-        newsResponse.news.articles.forEach {
+        newsResponse.newsArticles.articles.forEach {
             newsEntities.add(entityMapper.mapFromRemote(it))
         }
 

@@ -12,7 +12,7 @@ class NewsRemoteImpl @Inject constructor(private val newsService: NewsService,
         return newsService.getNews()
                 .map {
                     val entities = mutableListOf<NewsEntity>()
-                    it.news.articles.forEach { entities.add(entityMapper.mapFromRemote(it)) }
+                    it.articles.forEach { entities.add(entityMapper.mapFromRemote(it)) }
                     entities
                 }
     }

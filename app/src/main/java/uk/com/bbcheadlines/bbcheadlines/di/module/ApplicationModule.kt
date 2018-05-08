@@ -14,11 +14,13 @@ import uk.com.bbcheadlines.cache.PreferencesHelper
 import uk.com.bbcheadlines.cache.db.constants.NewsDatabase
 import uk.com.bbcheadlines.cache.mapper.NewsEntityMapper
 import uk.com.bbcheadlines.data.NewsDataRepository
+import uk.com.bbcheadlines.data.executor.JobExecutor
 import uk.com.bbcheadlines.data.mapper.NewsMapper
 import uk.com.bbcheadlines.data.repository.NewsCache
 import uk.com.bbcheadlines.data.repository.NewsRemote
 import uk.com.bbcheadlines.data.source.NewsDataStoreFactory
 import uk.com.bbcheadlines.domain.executor.PostExecutionThread
+import uk.com.bbcheadlines.domain.executor.ThreadExecutor
 import uk.com.bbcheadlines.domain.repository.NewsRepository
 import uk.com.bbcheadlines.remote.NewsRemoteImpl
 import uk.com.bbcheadlines.remote.NewsService
@@ -62,11 +64,11 @@ open class ApplicationModule {
         return NewsRemoteImpl(service, factory)
     }
 
-//    @Provides
-//    @PerApplication
-//    internal fun provideThreadExecutor(jobExecutor: JobExecutor) : ThreadExecutor {
-//        return jobExecutor
-//    }
+    @Provides
+    @PerApplication
+    internal fun provideThreadExecutor(jobExecutor: JobExecutor) : ThreadExecutor {
+        return jobExecutor
+    }
 
 
     @Provides
@@ -78,7 +80,7 @@ open class ApplicationModule {
     @Provides
     @PerApplication
     internal fun provideNewsService(): NewsService {
-        return NewsServiceFactory.makeBuffeoorService(BuildConfig.DEBUG)
+        return NewsServiceFactory.makeNewsHttpService(BuildConfig.DEBUG)
     }
 
     @Provides
