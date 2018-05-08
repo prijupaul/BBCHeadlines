@@ -1,7 +1,7 @@
 # BBCHeadlines
 Displays BBC Headlines
 ## Introduction
-Sample project which integrates with newsapi.org and displays the latest BBC headlines
+Sample project which integrates with [NewsApi](https://newsapi.org) and displays the latest BBC headlines
 
 ## Design Patterns and Methodologies used
 * MVVM design pattern is used for this project
