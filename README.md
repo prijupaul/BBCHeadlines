@@ -9,4 +9,4 @@ Sample project which integrates with [NewsApi](https://newsapi.org) and displays
 
 ## Testing
 * Unit tests are in place for all modules
-* Testing frameworks like Mockito, Robolectric,AssertJ, JUnit4 are used
+* Testing frameworks like Mockito, Robolectric,AssertJ, JUnit4 are used 
